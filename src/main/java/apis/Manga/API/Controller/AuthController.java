@@ -128,7 +128,6 @@ public class AuthController {
         }
         User userInstance = user.get();
         userInstance.setUsername(userUpdate.getUsername());
-        userInstance.setEmail(userUpdate.getEmail());
         userInstance.setAdmin(userUpdate.isAdmin());
         userInstance.setCoin(userUpdate.getCoin());
         userInstance.setCoAdmin(userUpdate.isCoAdmin());

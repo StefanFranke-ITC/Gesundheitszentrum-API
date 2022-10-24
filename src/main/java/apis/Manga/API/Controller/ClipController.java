@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://81.169.175.185")
+@CrossOrigin(origins = "http://ratetherank.com")
 @RestController
 @RequestMapping("/auth")
 public class ClipController {
@@ -28,7 +28,7 @@ public class ClipController {
         this.clipRepository = clipRepository;
 
     }
-   @CrossOrigin(origins = "http://81.169.175.185")
+   @CrossOrigin(origins = "http://ratetherank.com")
    @GetMapping("/clip")
     public List<Clip> getClip(){
         return clipRepository.findAll();
@@ -55,7 +55,7 @@ public class ClipController {
         return true;
     }
 
-    @CrossOrigin(origins = "http://81.169.175.185")
+    @CrossOrigin(origins = "http://ratetherank.com")
     @PutMapping("/clip/{clipId}")
     public void  patchClip(@RequestBody Clip clipUpdate, @PathVariable Long clipId) {
         Optional<Clip> clip = clipRepository.findById(clipId);

@@ -2,6 +2,7 @@ package apis.Manga.API.Entety;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -10,7 +11,7 @@ import java.util.Set;
 @Entity
 
 public class User {
-
+    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long nutzerId;
@@ -18,6 +19,7 @@ public class User {
     private String password;
     @Column(unique = true)
     private String username;
+    @JsonIgnore
     @Column(unique = true)
     private String email;
     private String valorant;
@@ -29,11 +31,14 @@ public class User {
     private String cod;
     private String overwatch;
     private boolean status;
+    @JsonIgnore
     private boolean admin;
+    @JsonIgnore
     private boolean coAdmin;
     private String instagram;
     private String twitch;
     private String facebook;
+    @JsonIgnore
     private int coin;
 
     @JsonIgnore

@@ -14,8 +14,7 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-@CrossOrigin(origins = "http://ratetherank.com")
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public class ClipController {
@@ -28,19 +27,22 @@ public class ClipController {
         this.clipRepository = clipRepository;
 
     }
-   @CrossOrigin(origins = "http://ratetherank.com")
+
+   @CrossOrigin
    @GetMapping("/clip")
     public List<Clip> getClip(){
         return clipRepository.findAll();
     }
 
+    @CrossOrigin
    @GetMapping("/clip/sortiert/{nutzerId}")
     public List<Clip> leseNutzerListe(@PathVariable Long nutzerId){
         List<Clip> clips = clipRepository.findAll();
         return  clips.stream().filter(c->c.getUser().getNutzerId() == nutzerId).collect(Collectors.toList());
     }
 
-   @GetMapping("/clip/{nutzerId}")
+    @CrossOrigin
+    @GetMapping("/clip/{nutzerId}")
     public Clip leseNutzerListe(@PathVariable long nutzerId){
         Optional<Clip> clip = clipRepository.findById(nutzerId);
         if(clip.isPresent()){
@@ -49,13 +51,14 @@ public class ClipController {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
 
+    @CrossOrigin
     @DeleteMapping("/{clipId}")
     public Boolean deleteOrder( @PathVariable (value = "clipId") Long Id) {
         clipRepository.deleteById(Id);
         return true;
     }
 
-    @CrossOrigin(origins = "http://ratetherank.com")
+    @CrossOrigin
     @PutMapping("/clip/{clipId}")
     public void  patchClip(@RequestBody Clip clipUpdate, @PathVariable Long clipId) {
         Optional<Clip> clip = clipRepository.findById(clipId);
@@ -73,7 +76,4 @@ public class ClipController {
         clipInstance.setClipName(clipUpdate.getClipName());
         clipRepository.save(clipInstance);
     }
-
-
-
 }

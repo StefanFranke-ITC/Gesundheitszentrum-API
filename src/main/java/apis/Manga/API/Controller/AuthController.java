@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://ratetherank.com")
+@CrossOrigin
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
@@ -43,7 +43,7 @@ public class AuthController {
 
     }
 
-    @CrossOrigin(origins = "http://ratetherank.com")
+    @CrossOrigin
     @PostMapping(value = "/Regist")
     public ResponseEntity<User> register(@RequestBody AuthRequest authRequest){
         Optional<User> userOptional = userRepository.findByEmail(authRequest.getEmail());
@@ -59,12 +59,12 @@ public class AuthController {
         return ResponseEntity.ok(created);
 
     }
-    @CrossOrigin(origins = "http://ratetherank.com")
+    @CrossOrigin
     @GetMapping("/user")
     public Optional<User> getUser(){
         return userRepository.findByEmail(jwtTokenProvider.getUserMailFromToken( JwtAuthentificationFilter.x) );
     }
-    @CrossOrigin(origins = "http://ratetherank.com")
+    @CrossOrigin
     @GetMapping("/user/all/{nutzerId}")
     public User leseNutzerListe(@PathVariable long nutzerId){
         Optional<User> user = Optional.ofNullable(userRepository.findById(nutzerId));
@@ -73,14 +73,15 @@ public class AuthController {
         }
         throw new ResponseStatusException(HttpStatus.NOT_FOUND);
     }
-    @CrossOrigin(origins = "http://ratetherank.com")
+
+    @CrossOrigin
     @GetMapping("/user/all")
     public List<User> getUserAll(){
         return userRepository.findAll();
     }
 
 
-    @CrossOrigin(origins = "http://ratetherank.com")
+    @CrossOrigin
     @PostMapping(value = "/login")
     public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
         Authentication authentication = authenticationManager.authenticate(
@@ -92,7 +93,7 @@ public class AuthController {
         return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication));
     }
 
-    @CrossOrigin(origins = "http://ratetherank.com")
+    @CrossOrigin
     @PutMapping("user/{nutzerId}")
     public void  patchUser(@RequestBody User userUpdate, @PathVariable Long nutzerId){
         Optional<User> user = userRepository.findById(nutzerId);
@@ -113,28 +114,8 @@ public class AuthController {
         userInstance.setTwitch(userUpdate.getTwitch());
         userRepository.save(userInstance);
     }
-    @CrossOrigin(origins = "http://ratetherank.com")
-    @DeleteMapping("/user/all/{nutzerId}")
-    public Boolean deleteOrder1( @PathVariable (value = "nutzerId") Long Id) {
-        userRepository.deleteById(Id);
-        return true;
-    }
-    @CrossOrigin(origins = "http://ratetherank.com")
-    @PutMapping("user/all/{nutzerId}")
-    public void  patchUser1(@RequestBody User userUpdate, @PathVariable Long nutzerId){
-        Optional<User> user = userRepository.findById(nutzerId);
-        if(!user.isPresent()){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-        }
-        User userInstance = user.get();
-        userInstance.setUsername(userUpdate.getUsername());
-        userInstance.setAdmin(userUpdate.isAdmin());
-        userInstance.setCoin(userUpdate.getCoin());
-        userInstance.setCoAdmin(userUpdate.isCoAdmin());
 
-        userRepository.save(userInstance);
-    }
-    @CrossOrigin(origins = "http://ratetherank.com")
+    @CrossOrigin
     @PostMapping(path="/clip/{nutzerId}")
     public String erzeugeClip(@RequestBody ClipRequest clipRequest, @PathVariable long nutzerId){
         return clipService.erzeugeClip(clipRequest,nutzerId);

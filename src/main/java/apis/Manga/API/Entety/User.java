@@ -11,7 +11,6 @@ import java.util.Set;
 @Entity
 
 public class User {
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long nutzerId;
@@ -31,14 +30,11 @@ public class User {
     private String cod;
     private String overwatch;
     private boolean status;
-    @JsonIgnore
     private boolean admin;
-    @JsonIgnore
     private boolean coAdmin;
     private String instagram;
     private String twitch;
     private String facebook;
-    @JsonIgnore
     private int coin;
 
     @JsonIgnore

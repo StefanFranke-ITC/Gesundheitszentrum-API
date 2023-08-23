@@ -29,7 +29,9 @@ public class ScheduledAdminCreation {
         User user = new User();
         user.setEmail("admin");
         user.setUsername("Admin");
-        user.setPassword(passwordEncoder.encode("admin"));
+            user.setStatus("Admin");
+
+            user.setPassword(passwordEncoder.encode("admin"));
 
         User createdAdmin = userRepository.save(user);
         return ResponseEntity.ok(createdAdmin);

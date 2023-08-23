@@ -35,42 +35,43 @@ public class JwtTokenProvider {
     }
 
     public String generateToken(Authentication authentication){
-        User user= (User) authentication.getPrincipal();
+        User user = (User) authentication.getPrincipal();
         return generateToken(user.getUsername());
     }
 
     public String getUserMailFromToken(String token){
-        Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
+        Jws<Claims> jwsClaims = Jwts.parserBuilder()
+                .setSigningKey(jwtSecret)
+                .build()
+                .parseClaimsJws(token);
+
+        Claims claims = jwsClaims.getBody();
         return claims.getSubject();
     }
 
-    public boolean valideToken(String token){
-            try{
-                Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
-                return true;
+    public boolean valideToken(String token) {
+        try {
+            Jws<Claims> jwsClaims = Jwts.parserBuilder()
+                    .setSigningKey(jwtSecret)
+                    .build()
+                    .parseClaimsJws(token);
 
-            }
-            catch (SignatureException ex){
+            // Das Token wurde erfolgreich validiert, du kannst hier weitere Verarbeitungsschritte durchführen
+            return true;
+        } catch (JwtException ex) {
+            if (ex instanceof SignatureException) {
                 log.error("Exception1");
-
-            }
-            catch (MalformedJwtException ex){
+            } else if (ex instanceof MalformedJwtException) {
                 log.error("Exception2");
-
-            }
-            catch (ExpiredJwtException ex){
-                log.error("Exception3");
-
-            }
-            catch (UnsupportedJwtException ex){
+            } else if (ex instanceof ExpiredJwtException) {
+                log.error("Exceptionxxx");
+            } else if (ex instanceof UnsupportedJwtException) {
                 log.error("Exception4");
-
+            } else {
+                log.error("Unexpected exception: " + ex.getMessage());
             }
-            catch (IllegalArgumentException ex){
-                log.error("Exception5");
 
-            }
             return false;
-
+        }
     }
 }

@@ -10,6 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -98,18 +101,35 @@ public class AuthController {
 
     @CrossOrigin
     @PostMapping(value = "/login")
-    public ResponseEntity<String> login(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<Map<String, Object>>  login(@RequestBody AuthRequest authRequest) {
+        try{
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         authRequest.getEmail(),
                         authRequest.getPassword()
                 )
         );
-        return ResponseEntity.ok(jwtTokenProvider.generateToken(authentication));
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            String jwtToken = jwtTokenProvider.generateToken(authentication);
+
+            Optional<User> userDetails = userRepository.findByEmail(authRequest.getEmail());;
+
+            Map<String, Object> response = new HashMap<>();
+            response.put("token", jwtToken);
+            response.put("user", userDetails);
+
+            return ResponseEntity.ok(response);
+        } catch (AuthenticationException e) {
+            // Handle authentication failure
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+
+
+
     }
 
 
-    
+
 }
 
 

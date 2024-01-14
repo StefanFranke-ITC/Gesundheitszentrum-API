@@ -2,7 +2,6 @@ package apis.Manga.API.Controller;
 import apis.Manga.API.Entety.*;
 
 import apis.Manga.API.Repository.UserRepository;
-import apis.Manga.API.Security.JwtAuthentificationFilter;
 import apis.Manga.API.Security.JwtTokenProvider;
 import apis.Manga.API.request.AuthRequest;
 import org.springframework.http.HttpStatus;
@@ -12,10 +11,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,25 +27,24 @@ public class AuthController {
 
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
+
     private AuthenticationManager authenticationManager;
     private JwtTokenProvider jwtTokenProvider;
 
 
-    public AuthController(  UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager, JwtTokenProvider jwtTokenProvider) {
+    public AuthController(  UserRepository userRepository, PasswordEncoder passwordEncoder, JwtTokenProvider jwtTokenProvider) {
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.authenticationManager = authenticationManager;
         this.jwtTokenProvider = jwtTokenProvider;
-
-
     }
 
-
-
-
+    @GetMapping("/user")
+    public List<User> getUser() {
+        return userRepository.findAll();
+    }
     @CrossOrigin
-    @PostMapping(value = "/Regist")
+    @PostMapping(value = "/regist")
     public ResponseEntity<User> register(@RequestBody AuthRequest authRequest) {
         Optional<User> userOptional = userRepository.findByEmail(authRequest.getEmail());
         if (userOptional.isPresent()) {
@@ -64,40 +60,6 @@ public class AuthController {
         return ResponseEntity.ok(created);
 
     }
-
-
-    @GetMapping("/user")
-    public Optional<User> getUser() {
-        return userRepository.findByEmail(jwtTokenProvider.getUserMailFromToken(JwtAuthentificationFilter.x));
-    }
-
-    @GetMapping("/user/all/{nutzerId}")
-    public User leseNutzerListe(@PathVariable long nutzerId) {
-        Optional<User> user = Optional.ofNullable(userRepository.findById(nutzerId));
-        if (user.isPresent()) {
-            return user.get();
-        }
-        throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-    }
-
-    @DeleteMapping("/user/all/{nutzerId}")
-    public Boolean deleteOrder1(@PathVariable(value = "nutzerId") Long Id) {
-        userRepository.deleteById(Id);
-        return true;
-    }
-
-
-
-
-    @CrossOrigin
-    @GetMapping("/user/all")
-    public List<User> getUserAll() {
-        return userRepository.findAll();
-    }
-
-
-
-
 
     @CrossOrigin
     @PostMapping(value = "/login")

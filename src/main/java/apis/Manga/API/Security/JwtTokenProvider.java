@@ -56,7 +56,6 @@ public class JwtTokenProvider {
                     .build()
                     .parseClaimsJws(token);
 
-            // Das Token wurde erfolgreich validiert, du kannst hier weitere Verarbeitungsschritte durchführen
             return true;
         } catch (JwtException ex) {
             if (ex instanceof SignatureException) {

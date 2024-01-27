@@ -12,7 +12,9 @@ public class Produkt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Lob
     private String bild;
+    @Lob
     private String text;
     private String ueberschrift;
     private String link;

@@ -8,10 +8,12 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/auth/preis")
 public class PreisController {
 
@@ -33,8 +35,8 @@ public class PreisController {
     }
 
     @PostMapping
-    public ResponseEntity<Preis> createPreis(@RequestBody Preis preis) {
-        Preis createdPreis = preisService.createPreis(preis);
+    public ResponseEntity<Preis> createPreis(@RequestParam("files") MultipartFile[] image, @RequestParam("text") String text, @RequestParam("dauer") String dauer, @RequestParam("ueberschrift") String ueberschift, @RequestParam("preis") String preis) {
+        Preis createdPreis = preisService.createPreis(image, text, dauer, ueberschift, preis);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPreis);
     }
 
@@ -43,6 +45,4 @@ public class PreisController {
         preisService.deletePreis(id);
         return ResponseEntity.noContent().build();
     }
-
-    // Weitere Methoden hier hinzufügen, wenn benötigt.
 }

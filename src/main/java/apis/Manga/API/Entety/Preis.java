@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@Data
 @Entity
 public class Preis {
     @Id
@@ -13,8 +14,18 @@ public class Preis {
     private long id;
 
     private String ueberschrift;
+    @Lob
     private String bild;
     private String preis;
+    @Lob
     private String text;
     private String dauer;
+
+    public Preis(String ueberschrift, String bild, String preis, String text, String dauer) {
+        this.ueberschrift = ueberschrift;
+        this.bild = bild;
+        this.preis = preis;
+        this.text = text;
+        this.dauer = dauer;
+    }
 }

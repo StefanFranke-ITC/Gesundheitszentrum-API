@@ -12,11 +12,14 @@ public class Bericht {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    //todo lob in texten
 
+    @Lob
     private String bild;
     private String datum;
     private String autor;
     private String ueberschrift;
+    @Lob
     private String text;
 
 }

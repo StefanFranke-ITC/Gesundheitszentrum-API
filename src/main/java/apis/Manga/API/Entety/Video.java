@@ -13,6 +13,7 @@ public class Video {
     private long id;
 
     private String url;
+    @Lob
     private String text;
 
 }

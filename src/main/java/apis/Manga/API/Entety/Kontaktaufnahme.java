@@ -15,6 +15,7 @@ public class Kontaktaufnahme {
     private String email;
     private String telefonnummer;
     private String name;
+    @Lob
     private String text;
 
 }

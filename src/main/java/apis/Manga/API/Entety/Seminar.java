@@ -17,6 +17,7 @@ public class Seminar {
     private String bisDatum;
     private String vonUhrzeit;
     private String bisUhrzeit;
+    @Lob
     private String text;
     private String preis;
     private String ort;

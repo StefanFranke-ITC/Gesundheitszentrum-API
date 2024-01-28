@@ -41,8 +41,8 @@ public class PreisController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletePreis(@PathVariable Long id) {
-        preisService.deletePreis(id);
+    public ResponseEntity<Void> deletePreis(@PathVariable String id) {
+        preisService.deletePreis(Long.parseLong(id));
         return ResponseEntity.noContent().build();
     }
 }

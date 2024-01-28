@@ -1,5 +1,6 @@
 package apis.Manga.API.Controller;
 
+import apis.Manga.API.Entety.Preis;
 import apis.Manga.API.Entety.Produkt;
 import apis.Manga.API.Repository.ProduktRepository;
 import apis.Manga.API.Service.ProduktService;
@@ -8,6 +9,7 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -34,8 +36,8 @@ public class ProduktController {
     }
 
     @PostMapping
-    public ResponseEntity<Produkt> createProdukt(@RequestBody Produkt produkt) {
-        Produkt createdProdukt = produkteService.createProdukt(produkt);
+    public ResponseEntity<Produkt> createProdukt(@RequestParam("files") MultipartFile[] image, @RequestParam("text") String text, @RequestParam("ueberschrift") String ueberschift, @RequestParam("link") String link) {
+        Produkt createdProdukt = produkteService.createProdukt(image, text, ueberschift, link);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProdukt);
     }
 
@@ -44,6 +46,4 @@ public class ProduktController {
         produkteService.deleteProdukt(id);
         return ResponseEntity.noContent().build();
     }
-
-    // Weitere Methoden hier hinzufügen, wenn benötigt.
 }

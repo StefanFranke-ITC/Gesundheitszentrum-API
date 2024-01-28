@@ -18,4 +18,11 @@ public class Produkt {
     private String text;
     private String ueberschrift;
     private String link;
+
+    public Produkt(String bild, String text, String ueberschrift, String link) {
+        this.bild = bild;
+        this.text = text;
+        this.ueberschrift = ueberschrift;
+        this.link = link;
+    }
 }

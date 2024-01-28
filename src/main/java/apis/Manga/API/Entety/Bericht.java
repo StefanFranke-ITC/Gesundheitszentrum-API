@@ -16,10 +16,18 @@ public class Bericht {
 
     @Lob
     private String bild;
+    @Lob
     private String datum;
     private String autor;
     private String ueberschrift;
     @Lob
     private String text;
 
+    public Bericht(String bild, String text, String datum, String autor, String ueberschrift) {
+        this.bild = bild;
+        this.datum = datum;
+        this.autor = autor;
+        this.ueberschrift = ueberschrift;
+        this.text = text;
+    }
 }

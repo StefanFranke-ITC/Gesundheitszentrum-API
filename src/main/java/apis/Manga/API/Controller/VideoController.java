@@ -45,5 +45,4 @@ public class VideoController {
         return ResponseEntity.noContent().build();
     }
 
-    // Weitere Methoden hier hinzufügen, wenn benötigt.
 }

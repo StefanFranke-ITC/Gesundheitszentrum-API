@@ -1,12 +1,14 @@
 package apis.Manga.API.Controller;
 
 import apis.Manga.API.Entety.Bericht;
+import apis.Manga.API.Entety.Preis;
 import apis.Manga.API.Repository.BerichtRepository;
 import apis.Manga.API.Service.BerichtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -33,8 +35,8 @@ public class BerichtController {
     }
 
     @PostMapping
-    public ResponseEntity<Bericht> createBericht(@RequestBody Bericht bericht) {
-        Bericht createdBericht = berichtService.createBericht(bericht);
+    public ResponseEntity<Bericht> createBericht(@RequestParam("files") MultipartFile[] image, @RequestParam("text") String text, @RequestParam("autor") String autor, @RequestParam("ueberschrift") String ueberschift, @RequestParam("datum") String datum) {
+        Bericht createdBericht = berichtService.createBericht(image, text, datum, autor, ueberschift);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBericht);
     }
 

@@ -1,6 +1,5 @@
-package apis.Manga.API.Service;
+package apis.Manga.API.service;
 
-import apis.Manga.API.Entety.Preis;
 import apis.Manga.API.Entety.Produkt;
 import apis.Manga.API.Repository.ProduktRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +21,7 @@ public class ProduktService {
     public Produkt createProdukt(MultipartFile[] image, String text, String ueberschift, String link) {
         try {
             String base64Bild = Base64.getEncoder().encodeToString(image[0].getBytes());
-            Produkt produkt = new Produkt( base64Bild, text, ueberschift, link);
+            Produkt produkt = new Produkt(base64Bild, text, ueberschift, link);
             return produkteRepository.save(produkt);
         } catch (Exception e) {
             return null;

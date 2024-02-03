@@ -2,9 +2,8 @@ package apis.Manga.API.Controller;
 
 import apis.Manga.API.Entety.Video;
 import apis.Manga.API.Repository.VideoRepository;
-import apis.Manga.API.Service.VideoService;
+import apis.Manga.API.service.VideoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,7 @@ public class VideoController {
         Video video = videoService.getVideoById(id);
         return ResponseEntity.ok(video);
     }
-    
+
     @GetMapping()
     public List<Video> getAllVideos() {
         return videoRepository.findAll();

@@ -1,4 +1,4 @@
-package apis.Manga.API.Service;
+package apis.Manga.API.service;
 
 import apis.Manga.API.Entety.Kontaktaufnahme;
 import apis.Manga.API.Repository.KontaktaufnahmeRepository;

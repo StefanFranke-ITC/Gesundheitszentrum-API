@@ -2,9 +2,8 @@ package apis.Manga.API.Controller;
 
 import apis.Manga.API.Entety.Seminar;
 import apis.Manga.API.Repository.SeminarRepository;
-import apis.Manga.API.Service.SeminarService;
+import apis.Manga.API.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +26,7 @@ public class SeminarController {
         Seminar seminar = seminarService.getSeminarById(id);
         return ResponseEntity.ok(seminar);
     }
-    
+
     @GetMapping()
     public List<Seminar> getAllSeminare() {
         return seminarRepository.findAll();

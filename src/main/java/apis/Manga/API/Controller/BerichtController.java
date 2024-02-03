@@ -1,9 +1,8 @@
 package apis.Manga.API.Controller;
 
 import apis.Manga.API.Entety.Bericht;
-import apis.Manga.API.Entety.Preis;
 import apis.Manga.API.Repository.BerichtRepository;
-import apis.Manga.API.Service.BerichtService;
+import apis.Manga.API.service.BerichtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

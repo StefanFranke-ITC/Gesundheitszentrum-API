@@ -1,11 +1,9 @@
-package apis.Manga.API.Service;
+package apis.Manga.API.service;
 
 import apis.Manga.API.Entety.Preis;
 import apis.Manga.API.Repository.PreisRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.support.JpaRepositoryImplementation;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Base64;

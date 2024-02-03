@@ -16,31 +16,29 @@ import java.io.IOException;
 
 public class JwtAuthentificationFilter extends OncePerRequestFilter {
 
+    public static String x = null;
     @Autowired
     private JwtTokenProvider jwtTokenProvider;
-
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
-
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwt = getJwtFromRequest(request);
-
-        if (StringUtils.hasText(jwt) && jwtTokenProvider.valideToken(jwt)){
+        System.out.println(jwt);
+        if (StringUtils.hasText(jwt) && jwtTokenProvider.valideToken(jwt)) {
             String mail = jwtTokenProvider.getUserMailFromToken(jwt);
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(mail);
             UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
-            filterChain.doFilter(request, response);
-        }
+        filterChain.doFilter(request, response);
+    }
 
-    public static String x = null;
-    private String getJwtFromRequest(HttpServletRequest request){
+    private String getJwtFromRequest(HttpServletRequest request) {
         String bearerToken = request.getHeader("Authorization");
-        if(StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")){
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer")) {
             x = bearerToken.substring(6);
             return x;
         }

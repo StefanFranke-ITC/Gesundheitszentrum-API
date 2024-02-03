@@ -14,8 +14,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 
-
-
 @Component
 @Slf4j
 public class JwtTokenProvider {
@@ -23,7 +21,7 @@ public class JwtTokenProvider {
     @Value("${app.jwtSecret}")
     private String jwtSecret;
 
-    public String generateToken(String userEmail){
+    public String generateToken(String userEmail) {
         Instant now = Instant.now();
         Instant expiration = now.plus(1, ChronoUnit.DAYS);
         return Jwts.builder()
@@ -34,12 +32,12 @@ public class JwtTokenProvider {
                 .compact();
     }
 
-    public String generateToken(Authentication authentication){
+    public String generateToken(Authentication authentication) {
         User user = (User) authentication.getPrincipal();
         return generateToken(user.getUsername());
     }
 
-    public String getUserMailFromToken(String token){
+    public String getUserMailFromToken(String token) {
         Jws<Claims> jwsClaims = Jwts.parserBuilder()
                 .setSigningKey(jwtSecret)
                 .build()
@@ -61,7 +59,7 @@ public class JwtTokenProvider {
             if (ex instanceof SignatureException) {
                 log.error("Exception1");
             } else if (ex instanceof MalformedJwtException) {
-                log.error("Exception2");
+                log.error("MalformedJwtException");
             } else if (ex instanceof ExpiredJwtException) {
                 log.error("Exceptionxxx");
             } else if (ex instanceof UnsupportedJwtException) {

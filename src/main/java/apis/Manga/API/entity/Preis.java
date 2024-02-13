@@ -1,7 +1,9 @@
-package apis.Manga.API.Entety;
+package apis.Manga.API.entity;
+
 import lombok.*;
 
 import javax.persistence.*;
+
 @Getter
 @Setter
 @ToString

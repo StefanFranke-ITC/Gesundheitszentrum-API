@@ -1,7 +1,7 @@
 package apis.Manga.API.service;
 
-import apis.Manga.API.Entety.Preis;
 import apis.Manga.API.Repository.PreisRepository;
+import apis.Manga.API.entity.Preis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -13,12 +13,16 @@ public class PreisService {
 
     @Autowired
     private PreisRepository preisRepository;
+    @Autowired
+    private AuthService authService;
 
     public Preis getPreisById(Long id) {
+        if (!authService.isAdmin()) return null;
         return preisRepository.findById(id).orElse(null);
     }
 
     public Preis createPreis(MultipartFile[] image, String text, String dauer, String ueberschift, String preis) {
+        if (!authService.isAdmin()) return null;
         try {
             String base64Bild = Base64.getEncoder().encodeToString(image[0].getBytes());
             Preis preis1 = new Preis(ueberschift, base64Bild, preis, text, dauer);
@@ -29,8 +33,8 @@ public class PreisService {
     }
 
     public void deletePreis(Long id) {
-        preisRepository.deleteById(id);
+        if (authService.isAdmin()) {
+            preisRepository.deleteById(id);
+        }
     }
-
-    // Weitere Methoden hier hinzufügen, wenn benötigt.
 }

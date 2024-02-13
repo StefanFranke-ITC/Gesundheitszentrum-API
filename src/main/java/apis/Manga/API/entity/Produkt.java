@@ -1,7 +1,12 @@
-package apis.Manga.API.Entety;
-import lombok.*;
+package apis.Manga.API.entity;
+
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
+
 @Getter
 @Setter
 @ToString

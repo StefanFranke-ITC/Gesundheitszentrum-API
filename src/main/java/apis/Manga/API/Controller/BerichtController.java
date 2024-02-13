@@ -1,7 +1,7 @@
 package apis.Manga.API.Controller;
 
-import apis.Manga.API.Entety.Bericht;
 import apis.Manga.API.Repository.BerichtRepository;
+import apis.Manga.API.entity.Bericht;
 import apis.Manga.API.service.BerichtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -45,5 +45,4 @@ public class BerichtController {
         return ResponseEntity.noContent().build();
     }
 
-    // Weitere Methoden hier hinzufügen, wenn benötigt.
 }

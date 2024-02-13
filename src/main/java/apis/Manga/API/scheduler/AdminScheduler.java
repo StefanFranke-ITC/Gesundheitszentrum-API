@@ -1,7 +1,7 @@
 package apis.Manga.API.scheduler;
 
-import apis.Manga.API.Entety.User;
 import apis.Manga.API.Repository.UserRepository;
+import apis.Manga.API.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,11 +22,11 @@ public class AdminScheduler {
 
     @Scheduled(initialDelay = 0, fixedDelay = Long.MAX_VALUE)
     public void createUserOnStartup() {
-        Optional<User> existingUser = userRepository.findByEmail("admin");
+        Optional<User> existingUser = userRepository.findByEmail("andreabachem83@gmail.com");
         if (existingUser.isEmpty()) {
             User user = new User();
-            user.setEmail("admin");
-            user.setPassword(passwordEncoder.encode("admin"));
+            user.setEmail("andreabachem83@gmail.com");
+            user.setPassword(passwordEncoder.encode("olli123katze"));
             userRepository.save(user);
         }
     }

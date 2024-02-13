@@ -1,7 +1,7 @@
 package apis.Manga.API.Controller;
 
-import apis.Manga.API.Entety.Seminar;
 import apis.Manga.API.Repository.SeminarRepository;
+import apis.Manga.API.entity.Seminar;
 import apis.Manga.API.service.SeminarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

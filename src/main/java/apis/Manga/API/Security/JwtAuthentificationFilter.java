@@ -26,6 +26,7 @@ public class JwtAuthentificationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String jwt = getJwtFromRequest(request);
         System.out.println(jwt);
+
         if (StringUtils.hasText(jwt) && jwtTokenProvider.valideToken(jwt)) {
             String mail = jwtTokenProvider.getUserMailFromToken(jwt);
             UserDetails userDetails = customUserDetailsService.loadUserByUsername(mail);

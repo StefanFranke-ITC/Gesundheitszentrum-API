@@ -1,4 +1,4 @@
-package apis.Manga.API.Entety;
+package apis.Manga.API.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

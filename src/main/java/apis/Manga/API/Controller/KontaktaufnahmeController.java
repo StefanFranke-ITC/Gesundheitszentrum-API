@@ -1,7 +1,8 @@
 package apis.Manga.API.Controller;
 
-import apis.Manga.API.Entety.Kontaktaufnahme;
 import apis.Manga.API.Repository.KontaktaufnahmeRepository;
+import apis.Manga.API.entity.Kontaktaufnahme;
+import apis.Manga.API.service.AuthService;
 import apis.Manga.API.service.KontaktaufnahmeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +18,8 @@ public class KontaktaufnahmeController {
 
     @Autowired
     private KontaktaufnahmeService kontaktaufnahmeService;
+    @Autowired
+    private AuthService authService;
 
     @Autowired
     private KontaktaufnahmeRepository kontaktaufnahmeRepository;
@@ -29,6 +32,7 @@ public class KontaktaufnahmeController {
 
     @GetMapping()
     public List<Kontaktaufnahme> getAllKontaktaufnahmen() {
+        if (!authService.isAdmin()) return null;
         return kontaktaufnahmeRepository.findAll();
     }
 
@@ -43,6 +47,4 @@ public class KontaktaufnahmeController {
         kontaktaufnahmeService.deleteKontaktaufnahme(id);
         return ResponseEntity.noContent().build();
     }
-
-    // Weitere Methoden hier hinzufügen, wenn benötigt.
 }

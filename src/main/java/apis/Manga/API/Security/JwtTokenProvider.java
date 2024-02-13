@@ -38,37 +38,32 @@ public class JwtTokenProvider {
     }
 
     public String getUserMailFromToken(String token) {
-        Jws<Claims> jwsClaims = Jwts.parserBuilder()
-                .setSigningKey(jwtSecret)
-                .build()
-                .parseClaimsJws(token);
-
-        Claims claims = jwsClaims.getBody();
+        Claims claims = Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token).getBody();
         return claims.getSubject();
     }
 
     public boolean valideToken(String token) {
         try {
-            Jws<Claims> jwsClaims = Jwts.parserBuilder()
-                    .setSigningKey(jwtSecret)
-                    .build()
-                    .parseClaimsJws(token);
-
+            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(token);
             return true;
-        } catch (JwtException ex) {
-            if (ex instanceof SignatureException) {
-                log.error("Exception1");
-            } else if (ex instanceof MalformedJwtException) {
-                log.error("MalformedJwtException");
-            } else if (ex instanceof ExpiredJwtException) {
-                log.error("Exceptionxxx");
-            } else if (ex instanceof UnsupportedJwtException) {
-                log.error("Exception4");
-            } else {
-                log.error("Unexpected exception: " + ex.getMessage());
-            }
 
-            return false;
+        } catch (SignatureException ex) {
+            log.error("Exception1");
+
+        } catch (MalformedJwtException ex) {
+            log.error("Exception2");
+
+        } catch (ExpiredJwtException ex) {
+            log.error("Exception3");
+
+        } catch (UnsupportedJwtException ex) {
+            log.error("Exception4");
+
+        } catch (IllegalArgumentException ex) {
+            log.error("Exception5");
+
         }
+        return false;
+
     }
 }

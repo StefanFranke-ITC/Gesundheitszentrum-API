@@ -18,18 +18,18 @@ public class Rechnung {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ElementCollection
-    private List<Long> leistungen; // Liste von Leistungs-IDs
-
-    private String straße;
-    private String plz;
-    private String ort;
-    private String hausnummer;
     private String name;
     private String vorname;
+    private String straße;
+    private String hausnummer;
+    private String plz;
+    private String ort;
     private String preis;
 
-    public Rechnung(List<Long> leistungen, String straße, String plz, String ort, String hausnummer, String name, String vorname, String preis) {
+    @OneToMany(mappedBy = "rechnung", cascade = CascadeType.ALL)
+    private List<Leistung> leistungen;
+
+    public Rechnung(List<Leistung> leistungen, String straße, String plz, String ort, String hausnummer, String name, String vorname, String preis) {
         this.leistungen = leistungen;
         this.straße = straße;
         this.plz = plz;

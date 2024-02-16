@@ -1,7 +1,9 @@
 package apis.Manga.API.service;
 
 import apis.Manga.API.Repository.RechnungRepository;
+import apis.Manga.API.entity.Leistung;
 import apis.Manga.API.entity.Rechnung;
+import apis.Manga.API.request.RechnungRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,12 +25,18 @@ public class RechnungService {
     }
 
     public List<Rechnung> getAllRechnungen() {
-        if (!authService.isAdmin()) return null;
+        /*if (!authService.isAdmin()) return null;*/
         return rechnungRepository.findAll();
     }
 
-    public Rechnung createRechnung(Rechnung rechnung) {
-        if (!authService.isAdmin()) return null;
+    public Rechnung createRechnung(RechnungRequest rechnungRequest) {
+        /*if (!authService.isAdmin()) return null;*/
+        Rechnung rechnung = rechnungRequest.getRechnung();
+        List<Leistung> leistungen = rechnungRequest.getLeistungen();
+        for (Leistung leistung : leistungen) {
+            leistung.setRechnung(rechnung);
+        }
+        rechnung.setLeistungen(leistungen);
         return rechnungRepository.save(rechnung);
     }
 

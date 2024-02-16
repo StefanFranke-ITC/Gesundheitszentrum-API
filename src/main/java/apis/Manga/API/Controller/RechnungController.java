@@ -1,6 +1,8 @@
 package apis.Manga.API.Controller;
 
+import apis.Manga.API.entity.Leistung;
 import apis.Manga.API.entity.Rechnung;
+import apis.Manga.API.request.RechnungRequest;
 import apis.Manga.API.service.RechnungService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +31,7 @@ public class RechnungController {
     }
 
     @PostMapping
-    public ResponseEntity<Rechnung> createRechnung(@RequestBody Rechnung rechnung) {
+    public ResponseEntity<Rechnung> createRechnung(@RequestBody RechnungRequest rechnung) {
         Rechnung createdRechnung = rechnungService.createRechnung(rechnung);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdRechnung);
     }
@@ -39,6 +41,4 @@ public class RechnungController {
         rechnungService.deleteRechnung(id);
         return ResponseEntity.noContent().build();
     }
-
-    // Weitere Methoden hier hinzufügen, wenn benötigt.
 }

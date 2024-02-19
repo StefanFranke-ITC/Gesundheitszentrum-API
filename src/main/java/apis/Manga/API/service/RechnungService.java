@@ -30,7 +30,6 @@ public class RechnungService {
     }
 
     public Rechnung createRechnung(RechnungRequest rechnungRequest) {
-        /*if (!authService.isAdmin()) return null;*/
         Rechnung rechnung = rechnungRequest.getRechnung();
         List<Leistung> leistungen = rechnungRequest.getLeistungen();
         for (Leistung leistung : leistungen) {

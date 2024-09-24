@@ -26,6 +26,7 @@ public class Rechnung {
     private String ort;
     private String preis;
     private String datum;
+    private String firma;
 
     @OneToMany(mappedBy = "rechnung", cascade = CascadeType.ALL)
     private List<Leistung> leistungen;

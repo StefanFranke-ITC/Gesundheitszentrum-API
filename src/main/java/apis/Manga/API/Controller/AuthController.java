@@ -81,7 +81,6 @@ public class AuthController {
             response.put("user", userDetails);
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
-            // Handle authentication failure
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 

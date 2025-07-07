@@ -1,6 +1,6 @@
 package apis.Manga.API.service;
 
-import apis.Manga.API.Repository.ProduktRepository;
+import apis.Manga.API.repository.ProduktRepository;
 import apis.Manga.API.entity.Produkt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

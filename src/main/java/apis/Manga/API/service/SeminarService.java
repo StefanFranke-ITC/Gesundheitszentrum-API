@@ -1,6 +1,6 @@
 package apis.Manga.API.service;
 
-import apis.Manga.API.Repository.SeminarRepository;
+import apis.Manga.API.repository.SeminarRepository;
 import apis.Manga.API.entity.Seminar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

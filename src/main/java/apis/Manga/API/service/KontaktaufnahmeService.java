@@ -1,6 +1,6 @@
 package apis.Manga.API.service;
 
-import apis.Manga.API.Repository.KontaktaufnahmeRepository;
+import apis.Manga.API.repository.KontaktaufnahmeRepository;
 import apis.Manga.API.entity.Kontaktaufnahme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

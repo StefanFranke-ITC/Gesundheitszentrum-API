@@ -1,6 +1,6 @@
 package apis.Manga.API.scheduler;
 
-import apis.Manga.API.Repository.UserRepository;
+import apis.Manga.API.repository.UserRepository;
 import apis.Manga.API.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;

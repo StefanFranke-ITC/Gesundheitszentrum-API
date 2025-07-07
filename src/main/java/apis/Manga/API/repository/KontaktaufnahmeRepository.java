@@ -1,10 +1,10 @@
-package apis.Manga.API.Repository;
+package apis.Manga.API.repository;
 
-import apis.Manga.API.entity.Seminar;
+import apis.Manga.API.entity.Kontaktaufnahme;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface SeminarRepository extends JpaRepository<Seminar, Long> {
+public interface KontaktaufnahmeRepository extends JpaRepository<Kontaktaufnahme, Long> {
     // Weitere benutzerdefinierte Abfragen können hier hinzugefügt werden, wenn benötigt.
 }

@@ -1,8 +1,8 @@
 package apis.Manga.API.Controller;
 
-import apis.Manga.API.Repository.UserRepository;
-import apis.Manga.API.Security.JwtAuthentificationFilter;
-import apis.Manga.API.Security.JwtTokenProvider;
+import apis.Manga.API.repository.UserRepository;
+import apis.Manga.API.security.JwtAuthentificationFilter;
+import apis.Manga.API.security.JwtTokenProvider;
 import apis.Manga.API.entity.User;
 import apis.Manga.API.request.AuthRequest;
 import org.springframework.beans.factory.annotation.Autowired;

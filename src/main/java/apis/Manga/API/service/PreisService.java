@@ -1,6 +1,6 @@
 package apis.Manga.API.service;
 
-import apis.Manga.API.Repository.PreisRepository;
+import apis.Manga.API.repository.PreisRepository;
 import apis.Manga.API.entity.Preis;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

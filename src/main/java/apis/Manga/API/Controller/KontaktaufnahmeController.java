@@ -1,6 +1,6 @@
 package apis.Manga.API.Controller;
 
-import apis.Manga.API.Repository.KontaktaufnahmeRepository;
+import apis.Manga.API.repository.KontaktaufnahmeRepository;
 import apis.Manga.API.entity.Kontaktaufnahme;
 import apis.Manga.API.service.AuthService;
 import apis.Manga.API.service.KontaktaufnahmeService;

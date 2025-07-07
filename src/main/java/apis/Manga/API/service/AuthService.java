@@ -1,8 +1,8 @@
 package apis.Manga.API.service;
 
-import apis.Manga.API.Repository.UserRepository;
-import apis.Manga.API.Security.JwtAuthentificationFilter;
-import apis.Manga.API.Security.JwtTokenProvider;
+import apis.Manga.API.repository.UserRepository;
+import apis.Manga.API.security.JwtAuthentificationFilter;
+import apis.Manga.API.security.JwtTokenProvider;
 import apis.Manga.API.entity.User;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;

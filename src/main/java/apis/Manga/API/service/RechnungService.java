@@ -1,6 +1,6 @@
 package apis.Manga.API.service;
 
-import apis.Manga.API.Repository.RechnungRepository;
+import apis.Manga.API.repository.RechnungRepository;
 import apis.Manga.API.entity.Leistung;
 import apis.Manga.API.entity.Rechnung;
 import apis.Manga.API.request.RechnungRequest;

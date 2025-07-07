@@ -1,6 +1,6 @@
-package apis.Manga.API.Security;
+package apis.Manga.API.security;
 
-import apis.Manga.API.Repository.UserRepository;
+import apis.Manga.API.repository.UserRepository;
 import apis.Manga.API.entity.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

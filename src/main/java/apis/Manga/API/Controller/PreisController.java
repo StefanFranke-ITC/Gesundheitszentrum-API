@@ -1,6 +1,6 @@
 package apis.Manga.API.Controller;
 
-import apis.Manga.API.Repository.PreisRepository;
+import apis.Manga.API.repository.PreisRepository;
 import apis.Manga.API.entity.Preis;
 import apis.Manga.API.service.PreisService;
 import org.springframework.beans.factory.annotation.Autowired;

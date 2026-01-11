@@ -30,6 +30,8 @@ public class SeminareNeuService {
         existing.setUnterUeberschrift(data.getUnterUeberschrift());
         existing.setMiniUnterUeberschrift(data.getMiniUnterUeberschrift());
         existing.setText(data.getText());
+        existing.setBacklinkName(data.getBacklinkName());
+        existing.setBacklinkUrl(data.getBacklinkUrl());
         existing.setUrl(data.getUrl());
         existing.setImage(data.getImage());
 

@@ -26,4 +26,8 @@ public class SeminareNeu {
     private String url;
     @Lob
     private String image;
+
+    private String backlinkUrl;
+    private String backlinkName;
+
 }

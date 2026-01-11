@@ -19,6 +19,9 @@ public class Bericht {
 
     //todo lob in texten
 
+    private String backlinkUrl;
+    private String backlinkName;
+
     @Lob
     private String bild;
     @Lob
@@ -28,8 +31,10 @@ public class Bericht {
     @Lob
     private String text;
 
-    public Bericht(String bild, String text, String datum, String autor, String ueberschrift) {
+    public Bericht(String bild, String text, String datum, String autor, String ueberschrift, String backlinkUrl, String backlinkName) {
         this.bild = bild;
+        this.backlinkName = backlinkName;
+        this.backlinkUrl = backlinkUrl;
         this.datum = datum;
         this.autor = autor;
         this.ueberschrift = ueberschrift;

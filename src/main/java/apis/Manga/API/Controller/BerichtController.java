@@ -34,8 +34,8 @@ public class BerichtController {
     }
 
     @PostMapping
-    public ResponseEntity<Bericht> createBericht(@RequestParam("files") MultipartFile[] image, @RequestParam("text") String text, @RequestParam("autor") String autor, @RequestParam("ueberschrift") String ueberschift, @RequestParam("datum") String datum) {
-        Bericht createdBericht = berichtService.createBericht(image, text, datum, autor, ueberschift);
+    public ResponseEntity<Bericht> createBericht(@RequestParam("files") MultipartFile[] image, @RequestParam("text") String text, @RequestParam("autor") String autor, @RequestParam("ueberschrift") String ueberschift, @RequestParam("datum") String datum, @RequestParam("backlinkName") String backlinkName, @RequestParam("backlinkUrl") String backlinkUrl) {
+        Bericht createdBericht = berichtService.createBericht(image, text, datum, autor, ueberschift, backlinkUrl, backlinkName);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdBericht);
     }
 

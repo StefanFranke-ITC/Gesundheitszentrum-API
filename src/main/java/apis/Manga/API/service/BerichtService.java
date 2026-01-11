@@ -25,12 +25,12 @@ public class BerichtService {
         return berichtRepository.findById(id).orElse(null);
     }
 
-    public Bericht createBericht(MultipartFile[] image, String text, String datum, String autor, String ueberschift) {
+    public Bericht createBericht(MultipartFile[] image, String text, String datum, String autor, String ueberschift, String backlinkUrl, String backlinkName) {
         if (!authService.isAdmin()) return null;
         System.out.println(authService.isAdmin());
         try {
             String base64Bild = Base64.getEncoder().encodeToString(image[0].getBytes());
-            Bericht bericht = new Bericht(base64Bild, text, datum, autor, ueberschift);
+            Bericht bericht = new Bericht(base64Bild, text, datum, autor, ueberschift, backlinkUrl, backlinkName);
             return berichtRepository.save(bericht);
         } catch (Exception e) {
             return null;

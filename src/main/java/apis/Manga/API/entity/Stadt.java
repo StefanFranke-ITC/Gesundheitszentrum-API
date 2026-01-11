@@ -38,6 +38,9 @@ public class Stadt {
     private String unterUeberschrift;
     private String miniUnterUeberschrift;
 
+    private String backlinkUrl;
+    private String backlinkName;
+
     @Override
     public int hashCode() {
         return Objects.hash(id);

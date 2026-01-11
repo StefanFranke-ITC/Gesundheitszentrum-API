@@ -34,6 +34,8 @@ public class StadtService {
         existing.setText(stadtData.getText());
         existing.setÜberschrift(stadtData.getÜberschrift());
         existing.setImage(stadtData.getImage());
+        existing.setBacklinkUrl(stadtData.getBacklinkUrl());
+        existing.setBacklinkName(stadtData.getBacklinkName());
         existing.setAutor(stadtData.getAutor());
         existing.setUnterUeberschrift(stadtData.getUnterUeberschrift());
         existing.setMiniUnterUeberschrift(stadtData.getMiniUnterUeberschrift());

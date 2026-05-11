@@ -24,7 +24,15 @@ public class PageService {
                 .orElseThrow(() -> new RuntimeException("Page nicht gefunden mit ID " + id));
     }
 
+    public Page getPageByUrl(String url) {
+        return pageRepository.findByUrl(url)
+                .orElseThrow(() -> new RuntimeException("Page nicht gefunden mit URL " + url));
+    }
+
     public Page createPage(Page page) {
+        if (pageRepository.existsByUrl(page.getUrl())) {
+            throw new RuntimeException("Page mit URL " + page.getUrl() + " existiert bereits");
+        }
         return pageRepository.save(page);
     }
 

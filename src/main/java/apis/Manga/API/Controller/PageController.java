@@ -41,10 +41,23 @@ public class PageController {
         }
     }
 
+    @GetMapping("/url/{url}")
+    public ResponseEntity<Page> getPageByUrl(@PathVariable String url) {
+        try {
+            return ResponseEntity.ok(pageService.getPageByUrl(url));
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Page> createPage(@RequestBody Page page) {
-        Page saved = pageService.createPage(page);
-        return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        try {
+            Page saved = pageService.createPage(page);
+            return ResponseEntity.status(HttpStatus.CREATED).body(saved);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        }
     }
 
     @PutMapping("/{id}")

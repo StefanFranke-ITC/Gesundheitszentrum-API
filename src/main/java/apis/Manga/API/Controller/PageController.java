@@ -32,7 +32,7 @@ public class PageController {
         return ResponseEntity.ok(pageService.getAllPages());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id:\\d+}")
     public ResponseEntity<Page> getPageById(@PathVariable Long id) {
         try {
             return ResponseEntity.ok(pageService.getPage(id));
@@ -41,7 +41,7 @@ public class PageController {
         }
     }
 
-    @GetMapping("/{url}")
+    @GetMapping({"/url/{url}", "/{url}"})
     public ResponseEntity<Page> getPageByUrl(@PathVariable String url) {
         try {
             return ResponseEntity.ok(pageService.getPageByUrl(url));

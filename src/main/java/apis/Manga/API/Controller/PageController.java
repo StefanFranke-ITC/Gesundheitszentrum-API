@@ -41,7 +41,7 @@ public class PageController {
         }
     }
 
-    @GetMapping({"/url/{url}", "/{url}"})
+    @GetMapping({"/{url}", "/{url}"})
     public ResponseEntity<Page> getPageByUrl(@PathVariable String url) {
         try {
             return ResponseEntity.ok(pageService.getPageByUrl(url));

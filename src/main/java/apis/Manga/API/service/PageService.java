@@ -2,9 +2,11 @@ package apis.Manga.API.service;
 
 import apis.Manga.API.entity.Page;
 import apis.Manga.API.repository.PageRepository;
+import apis.Manga.API.response.PageMetaResponse;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class PageService {
@@ -17,6 +19,13 @@ public class PageService {
 
     public List<Page> getAllPages() {
         return pageRepository.findAll();
+    }
+
+    public List<PageMetaResponse> getAllPageMeta() {
+        return pageRepository.findAll()
+                .stream()
+                .map(page -> new PageMetaResponse(page.getTitle(), page.getUrl()))
+                .collect(Collectors.toList());
     }
 
     public Page getPage(Long id) {
@@ -39,6 +48,10 @@ public class PageService {
     public Page updatePage(Long id, Page pageData) {
         Page existing = pageRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Page nicht gefunden mit ID " + id));
+
+        if (pageData.getUrl() != null && pageRepository.existsByUrlAndIdNot(pageData.getUrl(), id)) {
+            throw new IllegalArgumentException("Page mit URL " + pageData.getUrl() + " existiert bereits");
+        }
 
         existing.setContent(pageData.getContent());
         existing.setTitle(pageData.getTitle());

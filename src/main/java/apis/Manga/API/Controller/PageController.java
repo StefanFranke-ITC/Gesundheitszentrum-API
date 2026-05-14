@@ -1,6 +1,7 @@
 package apis.Manga.API.Controller;
 
 import apis.Manga.API.entity.Page;
+import apis.Manga.API.response.PageMetaResponse;
 import apis.Manga.API.service.PageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,16 +33,12 @@ public class PageController {
         return ResponseEntity.ok(pageService.getAllPages());
     }
 
-    @GetMapping("/id/{id:\\d+}")
-    public ResponseEntity<Page> getPageById(@PathVariable Long id) {
-        try {
-            return ResponseEntity.ok(pageService.getPage(id));
-        } catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/meta/all")
+    public ResponseEntity<List<PageMetaResponse>> getAllPageMeta() {
+        return ResponseEntity.ok(pageService.getAllPageMeta());
     }
 
-    @GetMapping({"/{url}", "/{url}"})
+    @GetMapping("/{url}")
     public ResponseEntity<Page> getPageByUrl(@PathVariable String url) {
         try {
             return ResponseEntity.ok(pageService.getPageByUrl(url));
@@ -64,6 +61,8 @@ public class PageController {
     public ResponseEntity<Page> updatePage(@PathVariable Long id, @RequestBody Page page) {
         try {
             return ResponseEntity.ok(pageService.updatePage(id, page));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
         }

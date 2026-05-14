@@ -11,4 +11,6 @@ public interface PageRepository extends JpaRepository<Page, Long> {
     Optional<Page> findByUrl(String url);
 
     boolean existsByUrl(String url);
+
+    boolean existsByUrlAndIdNot(String url, Long id);
 }

@@ -39,6 +39,26 @@ public class PreisController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPreis);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Preis> updatePreis(
+            @PathVariable Long id,
+            @RequestParam(value = "files", required = false) MultipartFile[] image,
+            @RequestParam("text") String text,
+            @RequestParam("dauer") String dauer,
+            @RequestParam("ueberschrift") String ueberschrift,
+            @RequestParam("preis") String preis
+    ) {
+        try {
+            Preis updatedPreis = preisService.updatePreis(id, image, text, dauer, ueberschrift, preis);
+            if (updatedPreis == null) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+            return ResponseEntity.ok(updatedPreis);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletePreis(@PathVariable String id) {
         preisService.deletePreis(Long.parseLong(id));

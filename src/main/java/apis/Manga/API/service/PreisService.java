@@ -32,6 +32,29 @@ public class PreisService {
         }
     }
 
+    public Preis updatePreis(Long id, MultipartFile[] image, String text, String dauer, String ueberschrift, String preis) {
+        if (!authService.isAdmin()) return null;
+
+        Preis existing = preisRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Preis nicht gefunden mit ID " + id));
+
+        existing.setUeberschrift(ueberschrift);
+        existing.setText(text);
+        existing.setDauer(dauer);
+        existing.setPreis(preis);
+
+        try {
+            if (image != null && image.length > 0 && image[0] != null && !image[0].isEmpty()) {
+                String base64Bild = Base64.getEncoder().encodeToString(image[0].getBytes());
+                existing.setBild(base64Bild);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException("Bild konnte nicht verarbeitet werden");
+        }
+
+        return preisRepository.save(existing);
+    }
+
     public void deletePreis(Long id) {
         if (authService.isAdmin()) {
             preisRepository.deleteById(id);
